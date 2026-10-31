@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iKanban - Gerenciador de Tarefas Clássico</title>
+  <!-- Folha de estilos retrô estilo Apple (Mac OS X / iOS clássico) -->
+  <link rel="stylesheet" href="style.css">
+  <!-- jQuery para manipulação simples do DOM -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+  <!-- Janela Principal com Estilo Mac OS X Aqua / Clássico -->
+  <div class="mac-window">
+    
+    <!-- Barra de Título da Janela com os botões clássicos (Semáforo) -->
+    <header class="window-header">
+      <div class="window-controls">
+        <span class="control-btn btn-close" title="Fechar"></span>
+        <span class="control-btn btn-min" title="Minimizar"></span>
+        <span class="control-btn btn-zoom" title="Expandir"></span>
+      </div>
+      <div class="window-title">🍎 iKanban - Gerenciador de Tarefas</div>
+      <div class="window-actions">
+        <a href="dashboard.html" class="aqua-btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">📊 Dashboard</a>
+        <button id="btn-nova-tarefa" class="aqua-btn aqua-btn-primary">+ Nova Tarefa</button>
+      </div>
+    </header>
+
+    <!-- Sub-barra com informações e data atual -->
+    <div class="window-subbar">
+      <div class="system-status">
+        <span class="status-indicator"></span> 
+        Modo Offline (Persistência Local via localStorage)
+      </div>
+      <div id="data-relogio" class="system-clock">--/--/---- --:--</div>
+    </div>
+
+    <!-- Barra de Abas Estilo Safari / Mac OS X Clássico -->
+    <div class="window-tabs-bar">
+      <div class="tabs-list" id="tabs-list">
+        <!-- Abas renderizadas dinamicamente via JavaScript -->
+      </div>
+      <button type="button" class="btn-add-tab" id="btn-add-tab" title="Adicionar Nova Aba de Projeto">+</button>
+    </div>
+
+    <!-- Área Principal: Quadro Kanban com 3 colunas -->
+    <main class="kanban-board">
+      
+      <!-- Coluna 1: A Fazer -->
+      <section class="kanban-column" id="col-todo" data-status="todo">
+        <div class="column-header">
+          <h2>A Fazer</h2>
+          <span class="task-count" id="count-todo">0</span>
+        </div>
+        <div class="column-body dropzone" data-status="todo">
+          <!-- Os cartões de tarefas serão inseridos aqui dinamicamente -->
+        </div>
+      </section>
+
+      <!-- Coluna 2: Em Execução -->
+      <section class="kanban-column" id="col-doing" data-status="doing">
+        <div class="column-header">
+          <h2>Em Execução</h2>
+          <span class="task-count" id="count-doing">0</span>
+        </div>
+        <div class="column-body dropzone" data-status="doing">
+          <!-- Os cartões de tarefas serão inseridos aqui dinamicamente -->
+        </div>
+      </section>
+
+      <!-- Coluna 3: Finalizado -->
+      <section class="kanban-column" id="col-done" data-status="done">
+        <div class="column-header">
+          <h2>Finalizado</h2>
+          <span class="task-count" id="count-done">0</span>
+        </div>
+        <div class="column-body dropzone" data-status="done">
+          <!-- Os cartões de tarefas serão inseridos aqui dinamicamente -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Rodapé da Janela com Dicas de Uso -->
+    <footer class="window-footer">
+      <span>💡 Dica: Arraste os cartões entre as colunas. Tarefas vencidas exigirão justificativa obrigatória para conclusão!</span>
+    </footer>
+
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: Criação e Edição de Tarefas -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="modal-tarefa">
+    <div class="modal-window">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-tarefa-titulo">Nova Tarefa</span>
+        <button type="button" class="close-modal-btn" id="btn-fechar-modal-tarefa">&times;</button>
+      </div>
+      <form id="form-tarefa">
+        <input type="hidden" id="tarefa-id">
+        
+        <div class="form-group">
+          <label for="tarefa-titulo">Título da Tarefa:</label>
+          <input type="text" id="tarefa-titulo" placeholder="Ex: Estudar comandos do Antigravity" required>
+        </div>
+
+        <div class="form-group">
+          <label for="tarefa-descricao">Descrição:</label>
+          <textarea id="tarefa-descricao" rows="3" placeholder="Detalhes da atividade..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="tarefa-categoria">Categoria:</label>
+          <select id="tarefa-categoria" required>
+            <option value="Trabalho">💼 Trabalho</option>
+            <option value="Estudos">📚 Estudos</option>
+            <option value="Pessoal">👤 Pessoal</option>
+            <option value="Projetos">🚀 Projetos</option>
+            <option value="Geral">📌 Geral</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tarefa-prazo">Prazo de Conclusão:</label>
+          <input type="datetime-local" id="tarefa-prazo" required>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="aqua-btn" id="btn-cancelar-tarefa">Cancelar</button>
+          <button type="submit" class="aqua-btn aqua-btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL OBRIGATÓRIO: Justificativa de Tarefa Vencida -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="modal-justificativa">
+    <div class="modal-window modal-warning">
+      <div class="modal-header modal-header-warning">
+        <span class="modal-title">⚠️ Tarefa Concluída Fora do Prazo</span>
+      </div>
+      <div class="modal-body-warning">
+        <p>A tarefa <strong id="justificativa-tarefa-nome"></strong> está <strong>vencida</strong>!</p>
+        <p class="warning-text">De acordo com as regras, é <u>obrigatório</u> informar uma justificativa/nota para permitir sua finalização.</p>
+        
+        <div class="form-group">
+          <label for="justificativa-texto">Motivo do atraso (Obrigatório):</label>
+          <textarea id="justificativa-texto" rows="3" placeholder="Descreva o motivo do atraso para arquivar a tarefa..." required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="aqua-btn" id="btn-cancelar-justificativa">Voltar sem Finalizar</button>
+        <button type="button" class="aqua-btn aqua-btn-primary" id="btn-confirmar-justificativa">Confirmar e Finalizar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: Criação de Nova Aba -->
+  <!-- ============================================== -->
+  <div class="modal-overlay" id="modal-aba">
+    <div class="modal-window" style="max-width: 380px;">
+      <div class="modal-header">
+        <span class="modal-title">Nova Aba de Tarefas</span>
+        <button type="button" class="close-modal-btn" id="btn-fechar-modal-aba">&times;</button>
+      </div>
+      <form id="form-aba">
+        <div class="form-group">
+          <label for="aba-nome">Nome da Aba (ex: Trabalho, Faculdade, Pessoal):</label>
+          <input type="text" id="aba-nome" placeholder="Digite o título da aba..." required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="aqua-btn" id="btn-cancelar-aba">Cancelar</button>
+          <button type="submit" class="aqua-btn aqua-btn-primary">Criar Aba</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script da aplicação -->
+  <script src="app.js"></script>
+</body>
+</html>
+

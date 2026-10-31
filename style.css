@@ -1,0 +1,855 @@
+/* ==========================================================================
+   iKanban - Estilo Skeuomórfico Clássico Apple (Mac OS X Aqua / iOS Clássico)
+   ========================================================================== */
+
+/* Configurações Globais e Tipografia Estilo Apple */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Lucida Grande", "Helvetica Neue", Arial, sans-serif;
+  user-select: none;
+}
+
+body {
+  /* Fundo estilo desktop clássico da Apple com degradê suave */
+  background: radial-gradient(circle at 50% 20%, #466385 0%, #1d2b3a 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #333;
+}
+
+/* --------------------------------------------------------------------------
+   Janela Mac OS X Aqua
+   -------------------------------------------------------------------------- */
+.mac-window {
+  width: 100%;
+  max-width: 1100px;
+  background: #e6e6e6;
+  border-radius: 8px 8px 6px 6px;
+  /* Sombra profunda e borda prateada típica do sistema operacional */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  border: 1px solid #7c7c7c;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Barra de Título (Window Header / Brushed Metal Style) */
+.window-header {
+  height: 44px;
+  background: linear-gradient(to bottom, #ebebeb 0%, #d5d5d5 50%, #c4c4c4 51%, #cfcfcf 100%);
+  border-bottom: 1px solid #9e9e9e;
+  box-shadow: inset 0 1px 0 #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  position: relative;
+}
+
+/* Botões Semáforo da Apple (Fechar, Minimizar, Zoom) */
+.window-controls {
+  display: flex;
+  gap: 8px;
+  width: 80px;
+}
+
+.control-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.7), 0 1px 2px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.btn-close {
+  background: radial-gradient(circle at 35% 35%, #ff837c 0%, #ff544d 60%, #cf2620 100%);
+  border: 1px solid #a6120d;
+}
+
+.btn-min {
+  background: radial-gradient(circle at 35% 35%, #ffd975 0%, #ffbe2f 60%, #cf920a 100%);
+  border: 1px solid #a77405;
+}
+
+.btn-zoom {
+  background: radial-gradient(circle at 35% 35%, #8ae97d 0%, #29ca41 60%, #159c29 100%);
+  border: 1px solid #117721;
+}
+
+/* Título centralizado na barra */
+.window-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3e3e3e;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.3px;
+}
+
+.window-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  width: auto;
+}
+
+/* Sub-barra metálica com status do sistema e relógio */
+.window-subbar {
+  background: linear-gradient(to bottom, #d2d2d2, #bebebe);
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  border-bottom: 1px solid #a6a6a6;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #28c840;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #28c840;
+}
+
+/* --------------------------------------------------------------------------
+   Barra de Abas (Tabs) Estilo Safari / Mac OS X Clássico
+   -------------------------------------------------------------------------- */
+.window-tabs-bar {
+  background: linear-gradient(to bottom, #bebebe 0%, #adadad 100%);
+  border-bottom: 1px solid #8e959e;
+  padding: 4px 12px 0 12px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  overflow-x: auto;
+}
+
+.tabs-list {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.tab-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(to bottom, #d6d6d6 0%, #c2c2c2 100%);
+  border: 1px solid #949494;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.tab-item:hover {
+  background: linear-gradient(to bottom, #e3e3e3 0%, #cecece 100%);
+  color: #222;
+}
+
+/* Aba ativa se funde com o fundo da área de trabalho do kanban */
+.tab-item.active {
+  background: #d8dee6;
+  border-color: #8c97a3;
+  color: #1a2430;
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 #ffffff;
+  padding-bottom: 7px;
+  margin-bottom: -1px; /* Cobre a borda inferior */
+  z-index: 2;
+}
+
+.tab-close-btn {
+  background: transparent;
+  border: none;
+  color: #777;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.tab-close-btn:hover {
+  background: #e04b4b;
+  color: #fff;
+  text-shadow: none;
+}
+
+/* Botão de Adicionar Aba (+) */
+.btn-add-tab {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #ffffff 0%, #dedede 100%);
+  border: 1px solid #999;
+  font-size: 15px;
+  font-weight: bold;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.btn-add-tab:hover {
+  background: linear-gradient(to bottom, #ffffff 0%, #eaeaea 100%);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 3px rgba(0, 0, 0, 0.25);
+  color: #111;
+}
+
+.btn-add-tab:active {
+  background: #ccc;
+}
+
+/* --------------------------------------------------------------------------
+   Botões Aqua Clássicos da Apple
+   -------------------------------------------------------------------------- */
+.aqua-btn {
+  background: linear-gradient(to bottom, #ffffff 0%, #ebebeb 50%, #d8d8d8 51%, #e5e5e5 100%);
+  border: 1px solid #999;
+  border-radius: 14px;
+  padding: 4px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  text-shadow: 0 1px 0 #fff;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: all 0.15s ease;
+  outline: none;
+}
+
+.aqua-btn:hover {
+  background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 50%, #e0e0e0 51%, #eeeeee 100%);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.aqua-btn:active {
+  background: linear-gradient(to bottom, #c0c0c0 0%, #d6d6d6 100%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Botão Aqua Azul (Primary) */
+.aqua-btn-primary {
+  background: linear-gradient(to bottom, #7ebcf7 0%, #2f8ce6 50%, #1570cc 51%, #459df0 100%);
+  border: 1px solid #135598;
+  color: #ffffff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.aqua-btn-primary:hover {
+  background: linear-gradient(to bottom, #8ec8ff 0%, #3d98ef 50%, #1e7bd6 51%, #52a8f8 100%);
+}
+
+.aqua-btn-primary:active {
+  background: linear-gradient(to bottom, #12579b 0%, #2475c7 100%);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   Quadro Kanban e Colunas
+   -------------------------------------------------------------------------- */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+  background: #d8dee6;
+  min-height: 480px;
+}
+
+/* Estrutura das Colunas */
+.kanban-column {
+  background: #eceef1;
+  border-radius: 6px;
+  border: 1px solid #b5bdc6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), inset 0 1px 0 #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.column-header {
+  background: linear-gradient(to bottom, #f2f4f7, #dcdee2);
+  border-bottom: 1px solid #bec5ce;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px 5px 0 0;
+}
+
+.column-header h2 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4a5460;
+  text-shadow: 0 1px 0 #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Contador de Tarefas em formato de pílula clássica */
+.task-count {
+  background: linear-gradient(to bottom, #9eaab7, #7e8b98);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 0 #ffffff;
+}
+
+/* Área de Drop / Lista de Cartões */
+.column-body {
+  padding: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 520px;
+  transition: background-color 0.2s ease;
+}
+
+/* Destaque visual quando um cartão é arrastado por cima da coluna */
+.column-body.drag-over {
+  background-color: #d7e4f3;
+  outline: 2px dashed #3a82ce;
+  outline-offset: -4px;
+  border-radius: 0 0 5px 5px;
+}
+
+/* --------------------------------------------------------------------------
+   Cartões de Tarefa (Cards)
+   -------------------------------------------------------------------------- */
+.task-card {
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #c2c7ce;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12), inset 0 1px 0 #ffffff;
+  padding: 12px;
+  cursor: grab;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18), inset 0 1px 0 #ffffff;
+  transform: translateY(-1px);
+}
+
+.task-card.dragging {
+  opacity: 0.45;
+  transform: scale(0.98);
+  cursor: grabbing;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.task-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2b333e;
+  word-break: break-word;
+}
+
+.task-desc {
+  font-size: 12px;
+  color: #555e69;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  word-break: break-word;
+}
+
+.task-meta {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6d7681;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Ações do cartão */
+.task-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  border-top: 1px solid #f0f2f5;
+  padding-top: 8px;
+}
+
+.task-btn-action {
+  background: #f1f3f5;
+  border: 1px solid #ccd0d6;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  cursor: pointer;
+  color: #444;
+}
+
+.task-btn-action:hover {
+  background: #e2e5e9;
+}
+
+.task-btn-delete {
+  color: #a31515;
+}
+
+.task-btn-finish {
+  background: #e5f6e8;
+  border-color: #a4dcac;
+  color: #176d25;
+}
+
+.task-btn-finish:hover {
+  background: #d1f0d5;
+}
+
+/* --------------------------------------------------------------------------
+   Estilos Especiais: Tarefas Fora do Prazo (Atrasadas)
+   -------------------------------------------------------------------------- */
+.task-card.overdue {
+  border: 1px solid #df5a5a;
+  background: linear-gradient(to bottom, #ffffff 80%, #fff0f0 100%);
+  box-shadow: 0 2px 6px rgba(215, 45, 45, 0.25);
+}
+
+/* Pílula vermelha brilhante estilo notificação do iOS clássico */
+.badge-overdue {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(to bottom, #ff5e5e 0%, #e02424 50%, #b80f0f 51%, #d92828 100%);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 1px solid #8e0707;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+  animation: pulse-badge 2s infinite ease-in-out;
+}
+
+@keyframes pulse-badge {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* --------------------------------------------------------------------------
+   Estilos Especiais: Tarefas Concluídas (Finalizado)
+   Restrição: não podem sofrer alteração de status
+   -------------------------------------------------------------------------- */
+.task-card.completed {
+  background: #f7f9f7;
+  border-color: #bcd4be;
+  cursor: default; /* Impede sensação de arrastar */
+}
+
+.task-card.completed .task-title {
+  color: #2b5631;
+}
+
+.badge-completed {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(to bottom, #6cd977 0%, #29aa39 50%, #1e872c 51%, #35b344 100%);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 1px solid #14611d;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.task-note-box {
+  background: #fff8db;
+  border: 1px dashed #d1b446;
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #634f0c;
+  line-height: 1.3;
+}
+
+.task-locked-notice {
+  font-size: 10px;
+  color: #7b887d;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Rodapé da Janela
+   -------------------------------------------------------------------------- */
+.window-footer {
+  background: linear-gradient(to bottom, #d5d5d5, #c8c8c8);
+  border-top: 1px solid #adadad;
+  padding: 8px 16px;
+  font-size: 11px;
+  color: #555;
+  text-shadow: 0 1px 0 #fff;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Modais Estilo Mac OS X Alert / Sheet
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-window {
+  width: 90%;
+  max-width: 440px;
+  background: #ececec;
+  border-radius: 8px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px #999;
+  border: 1px solid #ffffff;
+  overflow: hidden;
+  animation: pop-modal 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+@keyframes pop-modal {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  background: linear-gradient(to bottom, #e4e4e4, #d0d0d0);
+  border-bottom: 1px solid #b5b5b5;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.close-modal-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+}
+
+.close-modal-btn:hover {
+  color: #000;
+}
+
+form, .modal-body-warning {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  border: 1px solid #a8a8a8;
+  border-radius: 4px;
+  padding: 7px 10px;
+  font-size: 13px;
+  outline: none;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #3880ff;
+  box-shadow: 0 0 0 2px rgba(56, 128, 255, 0.35);
+}
+
+.modal-footer {
+  padding: 12px 16px;
+  background: #e2e2e2;
+  border-top: 1px solid #c7c7c7;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Modal específico de alerta de atraso */
+.modal-header-warning {
+  background: linear-gradient(to bottom, #fff2ce, #fedd82);
+  border-bottom: 1px solid #d4a945;
+}
+
+.warning-text {
+  font-size: 12px;
+  color: #8c4204;
+  line-height: 1.4;
+  background: #fff9e6;
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 3px solid #e08b1a;
+}
+
+/* --------------------------------------------------------------------------
+   Badges de Categorias de Tarefas (Pílulas Estilo iOS / Mac Clássico)
+   -------------------------------------------------------------------------- */
+.badge-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.2px;
+}
+
+/* Trabalho: Azul clássico corporativo */
+.cat-trabalho {
+  background: linear-gradient(to bottom, #5ba4e5, #206db2);
+  color: #fff;
+  border: 1px solid #144f85;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Estudos: Roxo / Violeta acadêmico */
+.cat-estudos {
+  background: linear-gradient(to bottom, #9b72cf, #62349e);
+  color: #fff;
+  border: 1px solid #481f7c;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Pessoal: Verde Esmeralda */
+.cat-pessoal {
+  background: linear-gradient(to bottom, #59c381, #248c4a);
+  color: #fff;
+  border: 1px solid #196936;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Projetos: Laranja criativo */
+.cat-projetos {
+  background: linear-gradient(to bottom, #f39c42, #c7670c);
+  color: #fff;
+  border: 1px solid #944a04;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Geral: Grafite / Prata metálico */
+.cat-geral {
+  background: linear-gradient(to bottom, #a3aab3, #717a85);
+  color: #fff;
+  border: 1px solid #555c65;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   Estrutura da Página de Dashboard Analítico
+   -------------------------------------------------------------------------- */
+.dashboard-content {
+  padding: 16px;
+  background: #d8dee6;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  max-height: 720px;
+}
+
+/* Grid dos Indicadores Numéricos (Widgets Mac OS) */
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  background: linear-gradient(to bottom, #ffffff 0%, #f1f3f6 100%);
+  border: 1px solid #bec5ce;
+  border-radius: 6px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), inset 0 1px 0 #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #a0aab5;
+}
+
+.stat-card.stat-primary::before { background: #2f8ce6; }
+.stat-card.stat-warning::before { background: #e09819; }
+.stat-card.stat-success::before { background: #28c840; }
+.stat-card.stat-danger::before  { background: #df3838; }
+.stat-card.stat-neutral::before { background: #8e71b8; }
+
+.stat-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #5d6773;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.stat-number {
+  font-size: 26px;
+  font-weight: 800;
+  color: #2b333e;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.stat-subtitle {
+  font-size: 11px;
+  color: #7b8591;
+  margin-top: 4px;
+}
+
+/* Grid de Gráficos Analíticos */
+.dashboard-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.chart-card {
+  background: #ffffff;
+  border: 1px solid #b5bdc6;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #ffffff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-header {
+  border-bottom: 1px solid #e5e8ec;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-header h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3b444f;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 240px;
+}
+
+/* Responsividade simples para telas menores */
+@media (max-width: 800px) {
+  .kanban-board {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dashboard-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

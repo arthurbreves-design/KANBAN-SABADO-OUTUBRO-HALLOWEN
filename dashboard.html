@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iKanban - Dashboard Analítico</title>
+  <!-- Folha de estilos retrô estilo Apple (Mac OS X / iOS clássico) -->
+  <link rel="stylesheet" href="style.css">
+  <!-- jQuery para manipulação simples do DOM -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- Chart.js para geração de gráficos limpos e modernos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Janela Principal com Estilo Mac OS X Aqua / Clássico -->
+  <div class="mac-window">
+    
+    <!-- Barra de Título da Janela com os botões clássicos (Semáforo) -->
+    <header class="window-header">
+      <div class="window-controls">
+        <span class="control-btn btn-close" title="Fechar"></span>
+        <span class="control-btn btn-min" title="Minimizar"></span>
+        <span class="control-btn btn-zoom" title="Expandir"></span>
+      </div>
+      <div class="window-title">🍎 iKanban - Dashboard Analítico</div>
+      <div class="window-actions">
+        <a href="index.html" class="aqua-btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">📋 Voltar ao Kanban</a>
+      </div>
+    </header>
+
+    <!-- Sub-barra com informações e data atual -->
+    <div class="window-subbar">
+      <div class="system-status">
+        <span class="status-indicator"></span> 
+        <span>Filtrar por Aba:</span>
+        <select id="filtro-aba-dashboard" style="font-size: 11px; padding: 2px 6px; border-radius: 4px; border: 1px solid #999; outline: none; background: #fff; cursor: pointer;">
+          <option value="todas">🌐 Todas as Abas (Global)</option>
+        </select>
+      </div>
+      <div id="data-relogio" class="system-clock">--/--/---- --:--</div>
+    </div>
+
+    <!-- Conteúdo Principal do Dashboard -->
+    <main class="dashboard-content">
+      
+      <!-- Seção 1: Indicadores Numéricos Consolidados (Widgets Mac OS) -->
+      <section class="dashboard-stats-grid">
+        
+        <!-- Indicador 1: Pendentes (A Fazer) -->
+        <div class="stat-card stat-warning">
+          <span class="stat-title">Tarefas Pendentes</span>
+          <span class="stat-number" id="stat-pendentes">0</span>
+          <span class="stat-subtitle">No quadro "A Fazer"</span>
+        </div>
+
+        <!-- Indicador 2: Em Execução -->
+        <div class="stat-card stat-primary">
+          <span class="stat-title">Em Execução</span>
+          <span class="stat-number" id="stat-execucao">0</span>
+          <span class="stat-subtitle">Em andamento ativo</span>
+        </div>
+
+        <!-- Indicador 3: Concluídas Total -->
+        <div class="stat-card stat-success">
+          <span class="stat-title">Tarefas Concluídas</span>
+          <span class="stat-number" id="stat-concluidas">0</span>
+          <span class="stat-subtitle">Total arquivadas</span>
+        </div>
+
+        <!-- Indicador 4: Concluídas Fora do Prazo (Com Justificativa) -->
+        <div class="stat-card stat-danger">
+          <span class="stat-title">Concluídas com Atraso</span>
+          <span class="stat-number" id="stat-concluidas-atraso">0</span>
+          <span class="stat-subtitle">Finalizadas após o prazo</span>
+        </div>
+
+        <!-- Indicador 5: Tarefas Atualmente Atrasadas (Pendentes/Em Execução) -->
+        <div class="stat-card stat-neutral">
+          <span class="stat-title">Vencidas Ativas</span>
+          <span class="stat-number" id="stat-ativas-vencidas">0</span>
+          <span class="stat-subtitle">Requerem atenção urgente</span>
+        </div>
+
+      </section>
+
+      <!-- Seção 2: Gráficos Analíticos Visuais -->
+      <section class="dashboard-charts-grid">
+        
+        <!-- Gráfico 1: Distribuição Geral por Status -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>📊 Distribuição Geral por Status</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-status"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico 2: Tarefas por Categorias -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>🏷️ Volume de Tarefas por Categoria</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-categorias"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico 3: Análise de Pontualidade -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>⏱️ Pontualidade de Conclusão</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-pontualidade"></canvas>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Rodapé da Janela -->
+    <footer class="window-footer">
+      <span>💡 Dashboard atualizado automaticamente com base nas tarefas armazenadas localmente no seu navegador.</span>
+    </footer>
+
+  </div>
+
+  <!-- Lógica analítica do Dashboard -->
+  <script src="dashboard.js"></script>
+</body>
+</html>
+
